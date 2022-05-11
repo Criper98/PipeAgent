@@ -1,0 +1,24 @@
+SERVER:
+
+- controlla se già installato;
+(NO)
+{
+	"Si vuole installare ora PipeAgent?";
+	(NO) {- termina il programma.}
+	(SI) {
+	"Scegliere la porta di comunicazione: <porta>";
+	"Avviare PipeAgent all'avvio di Windows?";
+	
+	- crea cartella "C:\PipeAgent";
+	- crea cartella "C:\PipeAgent\Server";
+	- crea cartella "C:\PipeAgent\Server\Log";
+	- crea file settaggi "C:\PipeAgent\Server\NetSettings.ini";
+	- crea file settaggi "C:\PipeAgent\Server\Server.ini";
+	- imposta settaggio (porta);
+	(Auto-Avvio == SI)
+		- imposta valore di registro ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "ServerAgent", "C:\PipeAgent\Server\PipeAgent.exe")
+	- imposta settaggio (Auto-Avvio);
+	- crea chiave di registro "SOFTWARE\\PipeAgent";
+	}
+	
+}

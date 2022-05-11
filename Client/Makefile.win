@@ -1,0 +1,28 @@
+# Project: PipeAgent
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = main.o
+LINKOBJ  = main.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib" -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/mingw32/lib" -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc510TDM_dll" -static-libgcc -Llib/sfml/lib -lsfml-graphics-d -lsfml-window-d -lsfml-system-d -lcurl
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/include" -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc/mingw32/5.1.0/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/include" -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc/mingw32/5.1.0/include" -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc/mingw32/5.1.0/include/c++"
+BIN      = PipeAgent.exe
+CXXFLAGS = $(CXXINCS) -std=c++11
+CFLAGS   = $(INCS) -std=c++11
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
