@@ -1,0 +1,34 @@
+/* THIS FILE WILL BE OVERWRITTEN BY DEV-C++ */
+/* DO NOT EDIT! */
+
+#include <windows.h> // include for version info constants
+
+
+//
+// TO CHANGE VERSION INFORMATION, EDIT PROJECT OPTIONS...
+//
+1 VERSIONINFO
+FILEVERSION 0,0,0,19
+PRODUCTVERSION 0,0,0,19
+FILETYPE VFT_APP
+{
+  BLOCK "StringFileInfo"
+  {
+    BLOCK "041004E4"
+    {
+      VALUE "CompanyName", "Criper98"
+      VALUE "FileVersion", "0.0.0.19"
+      VALUE "FileDescription", "PipeAgent by Criper98"
+      VALUE "InternalName", "PipeAgent Client"
+      VALUE "LegalCopyright", ""
+      VALUE "LegalTrademarks", ""
+      VALUE "OriginalFilename", "PipeAgent.exe"
+      VALUE "ProductName", "PipeAgent"
+      VALUE "ProductVersion", "0.0.0.19"
+    }
+  }
+  BLOCK "VarFileInfo"
+  {
+    VALUE "Translation", 0x0410, 1252
+  }
+}

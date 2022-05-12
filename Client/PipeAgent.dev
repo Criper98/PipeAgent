@@ -1,12 +1,12 @@
 [Project]
 FileName=PipeAgent.dev
-Name=PipeAgent
+Name=PipeAgent (Client)
 Type=1
 Ver=2
 ObjFiles=
 Includes=
 Libs=
-PrivateResource=
+PrivateResource=PipeAgent_private.rc
 ResourceIncludes=
 MakeIncludes=
 Compiler=
@@ -19,39 +19,39 @@ ObjectOutput=
 LogOutput=
 LogOutputEnabled=0
 OverrideOutput=0
-OverrideOutputName=
+OverrideOutputName=PipeAgent.exe
 HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
 CommandLine=
 Folders=
-IncludeVersionInfo=0
+IncludeVersionInfo=1
 SupportXPThemes=0
 CompilerSet=6
 CompilerSettings=0000000000000000000000000
-UnitCount=2
+UnitCount=3
 
 [VersionInfo]
-Major=1
+Major=0
 Minor=0
 Release=0
-Build=0
-LanguageID=1033
+Build=19
+LanguageID=1040
 CharsetID=1252
-CompanyName=
-FileVersion=
-FileDescription=Developed using the Dev-C++ IDE
-InternalName=
+CompanyName=Criper98
+FileVersion=0.0.0.19
+FileDescription=PipeAgent by Criper98
+InternalName=PipeAgent Client
 LegalCopyright=
 LegalTrademarks=
-OriginalFilename=
-ProductName=
-ProductVersion=
-AutoIncBuildNr=0
+OriginalFilename=PipeAgent.exe
+ProductName=PipeAgent
+ProductVersion=0.0.0.19
+AutoIncBuildNr=1
 SyncProduct=1
 
 [Unit2]
-FileName=ClassFunctions.h
+FileName=Classes.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -62,6 +62,16 @@ BuildCmd=
 
 [Unit1]
 FileName=main.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit3]
+FileName=Functions.h
 CompileCpp=1
 Folder=
 Compile=1

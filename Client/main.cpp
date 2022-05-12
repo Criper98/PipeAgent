@@ -2,30 +2,36 @@
 #include <windows.h>
 #include <essentials.h>
 #include <NetEss.h>
-#include "ClassFunctions.h"
+#include "Classes.h"
+#include "Functions.h"
 
 using namespace std;
 
 int main()
 {
 	TextColor tc;
+	Log lg;
+	NetSettings ns;
+	EasyMSGB msgb;
+	msgb.DefTitle="PipeAgent";
 	
-	if(CheckInst())
+	if(!CheckInst())
 	{
 		if(!Install())
 		{
-			tc.SetColor(tc.Red);
-			cout<<"Installazione fallita."<<endl;
-			tc.SetColor(tc.Default);
-			cout<<"Per maggiori informazioni consultare il file \"InstallLog.log\"."<<endl;
-			system("pause");
+			msgb.Ok("Installazione fallita.\nPer maggiori informazioni consultare il file \"InstallLog.log\".", msgb.Error);
 		}
 		return 0;
 	}
 	
-	Log lg;
 	lg.LogFile=true;
 	lg.SetFileName("log\\ExecLog.log");
+	lg.RWFile();
+	
+	if(!ns.Init())
+	{
+		msgb.Ok("Errore durante il controllo dei settaggi, impossibile procede.\nPer maggiori informazioni consultare il file \"ExecLog.log\".", msgb.Error);
+	}
 	
 	TcpIP Client;
 	//Client.Port=

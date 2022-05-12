@@ -1,11 +1,12 @@
-# Project: PipeAgent
+# Project: PipeAgent (Client)
 # Makefile created by Dev-C++ 5.11
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o
-LINKOBJ  = main.o
+RES      = PipeAgent_private.res
+OBJ      = main.o $(RES)
+LINKOBJ  = main.o $(RES)
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib" -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/mingw32/lib" -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc510TDM_dll" -static-libgcc -Llib/sfml/lib -lsfml-graphics-d -lsfml-window-d -lsfml-system-d -lcurl
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/include" -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc/mingw32/5.1.0/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/include" -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc/mingw32/5.1.0/include" -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc/mingw32/5.1.0/include/c++"
@@ -26,3 +27,7 @@ $(BIN): $(OBJ)
 
 main.o: main.cpp
 	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+PipeAgent_private.res: PipeAgent_private.rc 
+	$(WINDRES) -i PipeAgent_private.rc --input-format=rc -o PipeAgent_private.res -O coff 
+
