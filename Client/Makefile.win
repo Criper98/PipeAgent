@@ -7,11 +7,11 @@ WINDRES  = windres.exe
 RES      = PipeAgent_private.res
 OBJ      = main.o $(RES)
 LINKOBJ  = main.o $(RES)
-LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib" -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/mingw32/lib" -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc510TDM_dll" -static-libgcc -Llib/sfml/lib -lsfml-graphics-d -lsfml-window-d -lsfml-system-d -lcurl
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib" -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/mingw32/lib" -L"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc510TDM_dll" -static-libgcc -Llib/sfml/lib -lsfml-graphics-d -lsfml-window-d -lsfml-system-d -lcurl -lws2_32
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/include" -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc/mingw32/5.1.0/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/include" -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc/mingw32/5.1.0/include" -I"C:/Program Files (x86)/Dev-Cpp/TDM-GCC/lib/gcc/mingw32/5.1.0/include/c++"
 BIN      = PipeAgent.exe
-CXXFLAGS = $(CXXINCS) -std=c++11
+CXXFLAGS = $(CXXINCS) -std=c++11 -U__STRICT_ANSI__
 CFLAGS   = $(INCS) -std=c++11
 RM       = rm.exe -f
 

@@ -3,7 +3,16 @@ using namespace std;
 bool CheckInst() // controlla se il software è già installato
 {
 	RegUtils ru;
-	ru.MasterKey=ru.HKCU;
+	DirUtils du;
+	EasyMSGB msgb;
+	
+	ru.MasterKey=ru.HKLM;
+	
+	/*if(du.CheckFile("InstallLog.log"))
+	{
+		msgb.Ok("Per eseguire PipeAgent si prega di riavviare il sistema, a meno che non sia gia' stato avviato a seguito dell'installazione.", msgb.Info);
+		exit(0);
+	}*/
 	
 	if(ru.RegRead("SOFTWARE\\PipeAgent", "ClientInstall", REG_SZ) == "1")
 		return true;	// è già installato
@@ -14,21 +23,21 @@ bool CheckInst() // controlla se il software è già installato
 bool Install() // procedura di installazione del programma
 {
 	TextColor tc;
-	Log lg;
+	Log lg("InstallLog.log", true);
 	EasyMenu em;
 	LoadingBar lb;
 	DirUtils du;
 	RegUtils ru;
 	SimpleFileSettings sfs;
+	GeneralUtils gu;
+	EasyMSGB msgb;
 	
-	lg.LogFile=true;
-	lg.SetFileName("InstallLog.log");
-	lg.RWFile();
+	ru.MasterKey=ru.HKLM;
+	lg.RWFile(); // Sbianco il file di log
 	
 	lg.WriteLog("Inizializzazione dell'installazione.");
 	
-	ru.MasterKey=ru.HKCU;
-	lb.Color=10;
+	msgb.DefTitle="PipeAgent";
 	sfs.SetFileName("C:\\PipeAgent\\Client\\NetSettings.ini");
 	
 	vector<string> Menu;
@@ -45,6 +54,13 @@ bool Install() // procedura di installazione del programma
 	{
 		lg.WriteLog("Installazione annullata dall'utente.");
 		cout<<"Annullamento installazione..."<<endl;
+		return false;
+	}
+	
+	if(!gu.CheckUAC())
+	{
+		lg.WriteLog("No UAC.");
+		msgb.Ok("PipeAgent necessita dei permessi di amministratore per essere installato.\nSi prega di riavviare il programma fornendo tali permessi.", msgb.Error);
 		return false;
 	}
 	
@@ -113,7 +129,7 @@ bool Install() // procedura di installazione del programma
 	lb.Percent=56; // [---------------------------------------------------------------------------]
 	
 	lg.WriteLog("Copia di PipeAgent.exe in \"C:\\PipeAgent\\Client\".");
-	if(!du.CopyPasteFile(du.GetCurrentFilePath(), "C:\\PipeAgent\\Client\\PipeAgent.exe"))
+	if(!du.CopyPasteFile(du.GetFullFilePath(), "C:\\PipeAgent\\Client\\PipeAgent.exe"))
 	{
 		lb.StopBar(100);
 		lg.WriteLog("Copia fallita.");
@@ -121,11 +137,18 @@ bool Install() // procedura di installazione del programma
 	}
 	lb.Percent=70; // [---------------------------------------------------------------------------]
 	
-	lg.WriteLog("Scrittura chiave di registro per avvio automatico.");
-	if(!ru.RegWriteValue("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "ClientAgent", REG_SZ, "\"C:\\PipeAgent\\Client\\PipeAgent.exe\""))
+	/*lg.WriteLog("Scrittura chiave di registro per avvio automatico.");
+	if(!ru.RegWrite("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", "ClientPipeAgent", REG_SZ, "\"C:\\PipeAgent\\Client\\PipeAgent.exe\""))
 	{
 		lb.StopBar(100);
 		lg.WriteLog("Scrittura chiave di registro fallita.");
+		return false;
+	}*/
+	lg.WriteLog("Creazione Task di avvio automatico.");
+	if(gu.NoOutputCMD("schtasks /create /sc ONSTART /tn \"PipeAgent\" /tr \"C:\\PipeAgent\\Client\\PipeAgent.exe\" /ru System") != 0)
+	{
+		lb.StopBar(100);
+		lg.WriteLog("Creazione Task fallita.");
 		return false;
 	}
 	lb.Percent=84; // [---------------------------------------------------------------------------]
@@ -142,7 +165,7 @@ bool Install() // procedura di installazione del programma
 	lg.WriteLog("Installazione terminata.");
 	
 	lg.WriteLog("Scrittura chiave di registro per installazione terminata.");
-	if(!ru.RegWriteValue("SOFTWARE\\PipeAgent", "ClientInstall", REG_SZ, "1"))
+	if(!ru.RegWrite("SOFTWARE\\PipeAgent", "ClientInstall", REG_SZ, "1"))
 	{
 		lg.WriteLog("Scrittura chiave di registro fallita.");
 		return false;
@@ -157,7 +180,7 @@ bool Install() // procedura di installazione del programma
 	if(sel == 1)
 	{
 		lg.WriteLog("Esecuzione di PipeAgent.exe.");
-		du.RunExe("C:\\PipeAgent\\PipeAgent.exe");
+		du.RunExe("C:\\PipeAgent\\Client\\PipeAgent.exe");
 	}
 	
 	lg.WriteLog("Installazione terminata con successo.");

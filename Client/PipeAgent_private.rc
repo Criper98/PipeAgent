@@ -8,8 +8,8 @@
 // TO CHANGE VERSION INFORMATION, EDIT PROJECT OPTIONS...
 //
 1 VERSIONINFO
-FILEVERSION 0,0,0,19
-PRODUCTVERSION 0,0,0,19
+FILEVERSION 0,0,0,76
+PRODUCTVERSION 0,0,0,76
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"
@@ -17,14 +17,14 @@ FILETYPE VFT_APP
     BLOCK "041004E4"
     {
       VALUE "CompanyName", "Criper98"
-      VALUE "FileVersion", "0.0.0.19"
+      VALUE "FileVersion", "0.0.0.76"
       VALUE "FileDescription", "PipeAgent by Criper98"
       VALUE "InternalName", "PipeAgent Client"
       VALUE "LegalCopyright", ""
       VALUE "LegalTrademarks", ""
       VALUE "OriginalFilename", "PipeAgent.exe"
       VALUE "ProductName", "PipeAgent"
-      VALUE "ProductVersion", "0.0.0.19"
+      VALUE "ProductVersion", "0.0.0.76"
     }
   }
   BLOCK "VarFileInfo"
